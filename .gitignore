@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+output/
+.vscode/
+
+# 측정 데이터 (대용량)
+data/
+*.xlsx
