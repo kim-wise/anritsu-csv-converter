@@ -1,54 +1,28 @@
-# UHD 채널 파워 분석 도구
+# UHD 채널 파워 CSV 변환기
 
-Anritsu 계측기에서 수집한 UHD 대역 CSV 데이터를 파싱하여 총 채널 파워(dBm)를 계산하고,
-지도 시각화 및 통계 분석을 수행합니다.
+Anritsu 계측기에서 수집한 UHD 대역 CSV 파일을 변환하여 총 채널 파워(dBm)를 계산하고, 지도에 시각화합니다.
 
-## 프로젝트 구조
+## 사용 방법
 
-```
-anritsu_uhd/
-├── data/                   # 원본 측정 데이터
-│   ├── 251103_UHD/
-│   ├── 251105_UHD/
-│   └── Way_UHD/
-├── output/                 # 산출물 (git 제외)
-│   ├── edit/               # 개별 변환 xlsx
-│   ├── results/            # 통합 xlsx
-│   ├── plots/              # 통계 그래프 (PDF/CDF)
-│   └── maps/               # HTML 지도
-├── src/                    # 핵심 모듈
-│   ├── convert.py          # CSV 파싱 + 채널파워 계산
-│   ├── visualize_map.py    # Folium 지도 생성
-│   ├── stats.py            # 통계 + KDE 플롯
-│   └── run_all.py          # CLI 파이프라인
-├── web/                    # 브라우저 기반 변환기
-│   └── index.html
-├── csv_edit.ipynb          # 대화형 노트북
-└── README.md
-```
+**[👉 웹에서 바로 사용하기](https://kim-wise.github.io/anritsu-csv-converter/)**
 
-## 사용법
+1. 위 링크 클릭
+2. CSV 파일 드래그 또는 클릭하여 업로드 (여러 파일 가능)
+3. "변환 실행" 클릭
+4. 결과 확인 및 다운로드
 
-### CLI (일괄 처리)
+## 주요 기능
 
-```bash
-python -m src.run_all --data data/251105_UHD --name 251105
-```
+- **CSV 파싱**: Anritsu 측정 CSV에서 주파수별 파워 데이터 추출
+- **채널 파워 계산**: 개별 주파수 파워를 선형 합산하여 총 채널 파워(dBm) 산출
+- **지도 시각화**: GPS 좌표가 포함된 데이터를 지도에 컬러맵으로 표시
+- **통계 요약**: 평균, 최소, 최대값 자동 계산
+- **CSV 다운로드**: 변환된 결과를 개별/통합 CSV로 다운로드
 
-### 노트북
+## 로컬 실행
 
-`csv_edit.ipynb`를 열어 셀 단위로 실행합니다.
+서버 없이 `index.html`을 브라우저로 직접 열어도 동작합니다.
 
-### 웹 변환기
+## 라이선스
 
-`web/index.html`을 브라우저로 열면 서버 없이 CSV 변환 + 지도 시각화가 가능합니다.
-
-## 의존성
-
-```
-pandas
-openpyxl
-folium
-matplotlib
-numpy
-```
+MIT
